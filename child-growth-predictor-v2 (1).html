@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Child Growth & Development Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+<style>
+  /* ── Reset & Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --boy-light: #dbeafe;
+    --boy-mid:   #3b82f6;
+    --boy-dark:  #1d4ed8;
+    --girl-light:#fce7f3;
+    --girl-mid:  #ec4899;
+    --girl-dark: #be185d;
+    --green-light:#dcfce7;
+    --green-mid: #22c55e;
+    --green-dark:#15803d;
+    --amber-light:#fef9c3;
+    --amber-mid: #f59e0b;
+    --amber-dark:#92400e;
+    --teal-light:#ccfbf1;
+    --teal-mid:  #14b8a6;
+    --teal-dark: #0f766e;
+    --purple-light:#ede9fe;
+    --purple-mid:#7c3aed;
+    --purple-dark:#5b21b6;
+    --red-light: #fee2e2;
+    --red-mid:   #ef4444;
+    --red-dark:  #b91c1c;
+    --bg:        #f8faff;
+    --surface:   #ffffff;
+    --surface2:  #f1f5f9;
+    --border:    #e2e8f0;
+    --text:      #0f172a;
+    --text2:     #475569;
+    --text3:     #94a3b8;
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+    --shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+    --shadow-lg: 0 12px 40px rgba(0,0,0,.10), 0 4px 12px rgba(0,0,0,.06);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* ── Hero Header ── */
+  .hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 40%, #f093fb 100%);
+    padding: 3rem 1.5rem 5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='10'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,.18);
+    color: #fff;
+    font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 999px;
+    margin-bottom: 1rem;
+    backdrop-filter: blur(8px);
+  }
+  .hero h1 {
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: .75rem;
+    text-shadow: 0 2px 12px rgba(0,0,0,.15);
+  }
+  .hero p {
+    font-size: 1rem; color: rgba(255,255,255,.85);
+    max-width: 520px; margin: 0 auto;
+  }
+  .hero-pills {
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 8px;
+    margin-top: 1rem;
+  }
+  .hero-pill {
+    font-size: 11px; font-weight: 600; color: rgba(255,255,255,.9);
+    background: rgba(255,255,255,.15);
+    padding: 4px 12px; border-radius: 999px;
+    backdrop-filter: blur(4px);
+  }
+  .hero-dots {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    display: flex; gap: 0;
+  }
+  .hero-dots span {
+    flex: 1; height: 28px;
+    background: var(--bg);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+
+  /* ── Main Container ── */
+  .container {
+    max-width: 680px;
+    margin: -2rem auto 0;
+    padding: 0 1rem 3rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid var(--border);
+  }
+  .card-title {
+    font-size: 15px; font-weight: 700; color: var(--text);
+    margin-bottom: 1.25rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card-title-icon {
+    width: 28px; height: 28px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+  }
+  .badge-opt {
+    font-size: 10px; font-weight: 600; letter-spacing: .04em;
+    background: #f1f5f9; color: var(--text3);
+    padding: 3px 10px; border-radius: 999px;
+    margin-left: 4px;
+  }
+
+  /* ── Gender Cards ── */
+  .gender-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .gender-card {
+    border: 2px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.5rem 1rem;
+    cursor: pointer;
+    text-align: center;
+    transition: all .2s ease;
+    background: var(--surface2);
+    user-select: none;
+    position: relative; overflow: hidden;
+  }
+  .gender-card::after {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: inherit;
+    opacity: 0; transition: opacity .2s;
+  }
+  .gender-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .gender-card.sel-boy {
+    border-color: var(--boy-mid);
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    box-shadow: 0 4px 20px rgba(59,130,246,.20);
+  }
+  .gender-card.sel-girl {
+    border-color: var(--girl-mid);
+    background: linear-gradient(135deg, #fdf2f8, #fce7f3);
+    box-shadow: 0 4px 20px rgba(236,72,153,.20);
+  }
+  .gender-emoji { font-size: 3rem; margin-bottom: .5rem; display: block; line-height: 1; }
+  .gender-name { font-family: 'Nunito', sans-serif; font-size: 1.1rem; font-weight: 800; }
+  .gender-card.sel-boy .gender-name { color: var(--boy-dark); }
+  .gender-card.sel-girl .gender-name { color: var(--girl-dark); }
+  .gender-card:not(.sel-boy):not(.sel-girl) .gender-name { color: var(--text2); }
+  .gender-check {
+    position: absolute; top: 10px; right: 10px;
+    width: 22px; height: 22px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 700;
+    opacity: 0; transform: scale(0); transition: all .2s;
+  }
+  .sel-boy .gender-check { background: var(--boy-mid); opacity: 1; transform: scale(1); }
+  .sel-girl .gender-check { background: var(--girl-mid); opacity: 1; transform: scale(1); }
+
+  /* ── Form Elements ── */
+  label.lbl { font-size: 13px; font-weight: 600; color: var(--text2); display: block; margin-bottom: 6px; }
+  input[type="number"] {
+    width: 100%;
+    padding: 10px 14px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px; font-weight: 500;
+    color: var(--text);
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    outline: none;
+    transition: border-color .15s, box-shadow .15s;
+    -moz-appearance: textfield;
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
+  input[type="number"]:focus {
+    border-color: #a78bfa;
+    box-shadow: 0 0 0 3px rgba(167,139,250,.2);
+    background: #fff;
+  }
+  .field-group { display: flex; flex-direction: column; }
+
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+
+  .age-row { display: flex; align-items: flex-end; gap: 8px; }
+  .age-row .field-group { flex: 1; }
+  .age-sep { font-size: 20px; font-weight: 700; color: var(--text3); padding-bottom: 8px; }
+
+  /* ── Unit Toggle ── */
+  .unit-wrap { display: flex; gap: 8px; align-items: flex-end; }
+  .unit-wrap .field-group { flex: 1; }
+  .unit-toggle {
+    display: flex; border-radius: var(--radius-sm);
+    overflow: hidden; border: 1.5px solid var(--border);
+    background: var(--surface2); flex-shrink: 0;
+    height: 42px;
+  }
+  .unit-btn {
+    padding: 0 12px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px; font-weight: 600;
+    border: none; cursor: pointer;
+    background: transparent; color: var(--text3);
+    transition: all .15s;
+  }
+  .unit-btn.on { background: #7c3aed; color: #fff; }
+
+  /* ── Calculate Button ── */
+  .calc-btn {
+    width: 100%;
+    padding: 16px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.1rem; font-weight: 800;
+    border: none; border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all .2s;
+    letter-spacing: .01em;
+    position: relative; overflow: hidden;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(118,75,162,.35);
+  }
+  .calc-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(118,75,162,.45); }
+  .calc-btn:active { transform: translateY(0); }
+  .calc-btn.boy { background: linear-gradient(135deg, #3b82f6, #1d4ed8); box-shadow: 0 4px 20px rgba(59,130,246,.35); }
+  .calc-btn.boy:hover { box-shadow: 0 8px 28px rgba(59,130,246,.45); }
+  .calc-btn.girl { background: linear-gradient(135deg, #ec4899, #be185d); box-shadow: 0 4px 20px rgba(236,72,153,.35); }
+  .calc-btn.girl:hover { box-shadow: 0 8px 28px rgba(236,72,153,.45); }
+  .calc-btn-inner { display: flex; align-items: center; justify-content: center; gap: 8px; }
+
+  /* ── Error ── */
+  .error { font-size: 13px; font-weight: 500; color: #dc2626; margin-top: 8px; display: none; }
+  .error.show { display: block; }
+
+  /* ── Results ── */
+  .results { margin-top: 1.5rem; display: none; animation: fadeUp .4s ease; }
+  .results.show { display: block; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── Results Section Header ── */
+  .results-section-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px; font-weight: 800;
+    letter-spacing: .07em; text-transform: uppercase;
+    color: var(--text3);
+    margin: 1.5rem 0 .75rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .results-section-title::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+
+  /* ── Indicator Cards (Height / Weight / BMI) ── */
+  .indicator-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 1.25rem; }
+  .indicator-card {
+    border-radius: var(--radius-md);
+    padding: 1rem 1rem 1.1rem;
+    border: 1.5px solid;
+    position: relative; overflow: hidden;
+  }
+  .indicator-card.ic-height  { background: linear-gradient(135deg,#eff6ff,#dbeafe); border-color: #93c5fd; }
+  .indicator-card.ic-weight  { background: linear-gradient(135deg,#f0fdf4,#dcfce7); border-color: #86efac; }
+  .indicator-card.ic-bmi     { background: linear-gradient(135deg,#f5f3ff,#ede9fe); border-color: #c4b5fd; }
+  .indicator-icon { font-size: 22px; margin-bottom: 4px; }
+  .indicator-label { font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 6px; }
+  .ic-height .indicator-label  { color: #2563eb; }
+  .ic-weight .indicator-label  { color: #16a34a; }
+  .ic-bmi    .indicator-label  { color: #6d28d9; }
+  .indicator-pct {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.9rem; font-weight: 900; line-height: 1;
+  }
+  .ic-height .indicator-pct  { color: var(--boy-dark); }
+  .ic-weight .indicator-pct  { color: var(--green-dark); }
+  .ic-bmi    .indicator-pct  { color: var(--purple-dark); }
+  .indicator-sub { font-size: 11px; color: var(--text3); margin-top: 3px; }
+  .indicator-badge {
+    display: inline-block;
+    font-size: 10px; font-weight: 700;
+    padding: 2px 8px; border-radius: 999px;
+    margin-top: 6px;
+  }
+  .badge-healthy { background: #dcfce7; color: #15803d; }
+  .badge-low     { background: #fef9c3; color: #854d0e; }
+  .badge-high    { background: #fee2e2; color: #b91c1c; }
+  .badge-obese   { background: #fce7f3; color: #9d174d; }
+  .badge-na      { background: var(--surface2); color: var(--text3); }
+
+  /* ── WHO Percentile Banners ── */
+  .pct-banner {
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    position: relative; overflow: hidden;
+  }
+  .pct-banner.ok  { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1.5px solid #86efac; }
+  .pct-banner.low { background: linear-gradient(135deg, #fffbeb, #fef9c3); border: 1.5px solid #fcd34d; }
+  .pct-banner.high { background: linear-gradient(135deg, #fff1f2, #fee2e2); border: 1.5px solid #fca5a5; }
+  .pct-deco {
+    position: absolute; right: -20px; top: -20px;
+    width: 100px; height: 100px; border-radius: 50%;
+    opacity: .10;
+  }
+  .pct-banner.ok  .pct-deco  { background: #22c55e; }
+  .pct-banner.low .pct-deco  { background: #f59e0b; }
+  .pct-banner.high .pct-deco { background: #ef4444; }
+  .pct-number {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2.5rem; font-weight: 900; line-height: 1;
+    margin-bottom: 2px;
+  }
+  .pct-banner.ok   .pct-number { color: #15803d; }
+  .pct-banner.low  .pct-number { color: #92400e; }
+  .pct-banner.high .pct-number { color: #991b1b; }
+  .pct-who { font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 10px; }
+  .pct-banner.ok   .pct-who { color: #16a34a; }
+  .pct-banner.low  .pct-who { color: #b45309; }
+  .pct-banner.high .pct-who { color: #dc2626; }
+
+  /* Progress bar */
+  .bar-track {
+    height: 10px; border-radius: 99px;
+    background: rgba(0,0,0,.08); margin-bottom: 6px; position: relative;
+    overflow: visible;
+  }
+  .bar-fill { height: 100%; border-radius: 99px; transition: width .8s cubic-bezier(.34,1.56,.64,1); position: relative; }
+  .pct-banner.ok   .bar-fill { background: linear-gradient(90deg, #4ade80, #16a34a); }
+  .pct-banner.low  .bar-fill { background: linear-gradient(90deg, #fcd34d, #f59e0b); }
+  .pct-banner.high .bar-fill { background: linear-gradient(90deg, #fca5a5, #ef4444); }
+  .bar-thumb {
+    position: absolute; right: -6px; top: 50%;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: #fff; border: 3px solid;
+    transform: translateY(-50%);
+    box-shadow: 0 2px 6px rgba(0,0,0,.15);
+  }
+  .pct-banner.ok   .bar-thumb { border-color: #16a34a; }
+  .pct-banner.low  .bar-thumb { border-color: #f59e0b; }
+  .pct-banner.high .bar-thumb { border-color: #ef4444; }
+  .bar-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--text3); font-weight: 500; }
+  .pct-msg { font-size: 13px; line-height: 1.65; margin-top: 10px; }
+  .pct-banner.ok   .pct-msg { color: #166534; }
+  .pct-banner.low  .pct-msg { color: #78350f; }
+  .pct-banner.high .pct-msg { color: #7f1d1d; }
+
+  /* ── Metrics grid ── */
+  .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 1.25rem; }
+  .metric {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+  }
+  .metric-val { font-family: 'Nunito', sans-serif; font-size: 1.3rem; font-weight: 800; color: var(--text); }
+  .metric-lbl { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: .04em; margin-top: 3px; }
+
+  /* ── Weight Range Card ── */
+  .weight-range-card {
+    background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+    border: 1.5px solid #86efac;
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .weight-range-title {
+    font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    color: #16a34a; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .weight-range-scale {
+    position: relative; margin: 8px 0 20px;
+  }
+  .wrs-track {
+    height: 12px; border-radius: 99px;
+    background: linear-gradient(90deg, #fef9c3 0%, #dcfce7 20%, #dcfce7 80%, #fee2e2 100%);
+    border: 1px solid rgba(0,0,0,.06);
+    position: relative;
+  }
+  .wrs-zone-labels {
+    display: flex; justify-content: space-between;
+    font-size: 10px; color: var(--text3); font-weight: 600;
+    margin-top: 5px;
+  }
+  .wrs-marker {
+    position: absolute; top: -5px;
+    width: 4px; height: 22px; border-radius: 2px;
+    background: #0f172a;
+    transform: translateX(-50%);
+    transition: left .8s cubic-bezier(.34,1.56,.64,1);
+  }
+  .wrs-marker-label {
+    position: absolute; top: -22px;
+    font-size: 10px; font-weight: 700;
+    color: #0f172a;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    transition: left .8s cubic-bezier(.34,1.56,.64,1);
+  }
+  .weight-range-row {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px;
+    margin-top: 4px;
+  }
+  .wrange-cell {
+    background: rgba(255,255,255,.7);
+    border-radius: var(--radius-sm);
+    padding: 8px 10px;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,.05);
+  }
+  .wrange-val { font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800; color: #15803d; }
+  .wrange-lbl { font-size: 10px; font-weight: 600; color: #16a34a; text-transform: uppercase; letter-spacing: .04em; margin-top: 2px; }
+
+  /* ── BMI Gauge ── */
+  .bmi-card {
+    background: linear-gradient(135deg, #f5f3ff, #ede9fe);
+    border: 1.5px solid #c4b5fd;
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .bmi-title {
+    font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    color: #6d28d9; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .bmi-number-row { display: flex; align-items: flex-end; gap: 12px; margin-bottom: 12px; }
+  .bmi-big {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2.5rem; font-weight: 900; line-height: 1; color: #5b21b6;
+  }
+  .bmi-meta { display: flex; flex-direction: column; gap: 2px; }
+  .bmi-classification {
+    font-size: 14px; font-weight: 700;
+    padding: 3px 12px; border-radius: 999px;
+    display: inline-block;
+  }
+  .bmi-classification.underweight { background: #fef9c3; color: #854d0e; }
+  .bmi-classification.healthy     { background: #dcfce7; color: #15803d; }
+  .bmi-classification.overweight  { background: #ffedd5; color: #9a3412; }
+  .bmi-classification.obese       { background: #fee2e2; color: #991b1b; }
+  .bmi-pct-note { font-size: 12px; color: #7c3aed; }
+  .bmi-scale-wrap { position: relative; }
+  .bmi-track {
+    height: 10px; border-radius: 99px;
+    background: linear-gradient(90deg, #bfdbfe 0%, #bbf7d0 25%, #fde68a 65%, #fca5a5 85%, #f9a8d4 100%);
+    border: 1px solid rgba(0,0,0,.06); margin-bottom: 5px;
+    position: relative;
+  }
+  .bmi-needle {
+    position: absolute; top: -4px;
+    width: 3px; height: 18px; border-radius: 2px;
+    background: #1e1b4b;
+    transform: translateX(-50%);
+    transition: left .8s cubic-bezier(.34,1.56,.64,1);
+  }
+  .bmi-scale-labels {
+    display: flex; justify-content: space-between;
+    font-size: 10px; color: var(--text3); font-weight: 600;
+  }
+  .bmi-ranges { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+  .bmi-range-chip {
+    font-size: 10px; font-weight: 600;
+    padding: 3px 10px; border-radius: 999px;
+  }
+  .bmi-range-chip.underweight { background: #fef9c3; color: #854d0e; }
+  .bmi-range-chip.healthy     { background: #dcfce7; color: #15803d; }
+  .bmi-range-chip.overweight  { background: #ffedd5; color: #9a3412; }
+  .bmi-range-chip.obese       { background: #fee2e2; color: #991b1b; }
+
+  /* ── Prediction card ── */
+  .pred-card {
+    border-radius: var(--radius-lg);
+    padding: 1.5rem 1.75rem;
+    text-align: center;
+    margin-bottom: 1.25rem;
+    box-shadow: var(--shadow-md);
+  }
+  .pred-card.boy  { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1.5px solid #93c5fd; }
+  .pred-card.girl { background: linear-gradient(135deg, #fdf2f8, #fce7f3); border: 1.5px solid #f9a8d4; }
+  .pred-label { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 8px; }
+  .pred-card.boy  .pred-label { color: var(--boy-mid); }
+  .pred-card.girl .pred-label { color: var(--girl-mid); }
+  .pred-range {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2rem; font-weight: 900; line-height: 1.1;
+    margin-bottom: 4px;
+  }
+  .pred-card.boy  .pred-range { color: var(--boy-dark); }
+  .pred-card.girl .pred-range { color: var(--girl-dark); }
+  .pred-sub { font-size: 13px; color: var(--text2); }
+  .pred-formula {
+    margin-top: 10px; font-size: 12px; padding: 8px 14px;
+    background: rgba(255,255,255,.6); border-radius: var(--radius-sm);
+    color: var(--text2); font-weight: 500;
+  }
+  .pred-prompt {
+    text-align: center; padding: 1rem;
+    font-size: 13px; color: var(--text3);
+    border: 1.5px dashed var(--border);
+    border-radius: var(--radius-md);
+    margin-bottom: 1.25rem;
+  }
+
+  /* ── Insights Panel ── */
+  .insights-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+    box-shadow: var(--shadow-sm);
+  }
+  .insights-title {
+    font-size: 14px; font-weight: 700; color: var(--text);
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .insight-item {
+    display: flex; gap: 10px; padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .insight-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .insight-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px;
+  }
+  .insight-dot.green  { background: #22c55e; }
+  .insight-dot.amber  { background: #f59e0b; }
+  .insight-dot.red    { background: #ef4444; }
+  .insight-dot.blue   { background: #3b82f6; }
+  .insight-dot.purple { background: #7c3aed; }
+  .insight-text { font-size: 13px; line-height: 1.6; color: var(--text2); }
+  .insight-text strong { color: var(--text); font-weight: 600; }
+
+  /* Disclaimer */
+  .disclaimer {
+    background: var(--surface2);
+    border-left: 4px solid #a78bfa;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 14px 16px;
+    font-size: 12px; line-height: 1.7; color: var(--text3);
+  }
+  .disclaimer strong { color: var(--text2); }
+
+  /* Footer */
+  .footer { text-align: center; padding: 2rem 1rem 3rem; font-size: 12px; color: var(--text3); }
+  .footer span { display: inline-flex; align-items: center; gap: 4px; }
+
+  @media (max-width: 520px) {
+    .hero { padding: 2.5rem 1rem 4.5rem; }
+    .row2, .row3 { grid-template-columns: 1fr; }
+    .metrics { grid-template-columns: 1fr 1fr; }
+    .pred-range { font-size: 1.6rem; }
+    .indicator-grid { grid-template-columns: 1fr; }
+    .indicator-pct { font-size: 1.5rem; }
+  }
+
+  /* ── Affiliate Block ── */
+  .affiliate-block {
+    background: linear-gradient(135deg, #fefce8, #fff7ed);
+    border: 1.5px solid #fde68a;
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .affiliate-block-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px; font-weight: 800; color: #92400e;
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .affiliate-links { display: flex; flex-direction: column; gap: 8px; }
+  .affiliate-link {
+    display: flex; align-items: center; gap: 10px;
+    background: #fff;
+    border: 1px solid #fde68a;
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 13.5px; font-weight: 500;
+    transition: all .15s;
+    box-shadow: var(--shadow-sm);
+  }
+  .affiliate-link:hover {
+    background: #fffbeb;
+    border-color: #f59e0b;
+    transform: translateX(3px);
+    box-shadow: var(--shadow-md);
+  }
+  .affiliate-link-icon { font-size: 18px; flex-shrink: 0; }
+  .affiliate-link-text { flex: 1; }
+  .affiliate-link-text strong { display: block; font-size: 13px; font-weight: 700; color: var(--text); }
+  .affiliate-link-text span { font-size: 11px; color: var(--text3); }
+  .affiliate-link-arrow { font-size: 14px; color: var(--text3); flex-shrink: 0; }
+  .affiliate-disclosure { font-size: 10px; color: var(--text3); margin-top: 10px; font-style: italic; }
+
+  /* ── AdSense Unit ── */
+  .adsense-unit {
+    background: var(--surface2);
+    border: 1px dashed var(--border);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    margin-bottom: 1.25rem;
+    text-align: center;
+    overflow: hidden;
+  }
+  .adsense-label {
+    font-size: 10px; font-weight: 600; color: var(--text3);
+    text-transform: uppercase; letter-spacing: .06em;
+    margin-bottom: 6px;
+  }
+
+  /* ── Sticky Affiliate Bar ── */
+  .sticky-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(90deg, #1e1b4b, #312e81);
+    color: #fff;
+    padding: 10px 16px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    z-index: 999;
+    box-shadow: 0 -4px 20px rgba(0,0,0,.2);
+  }
+  .sticky-bar-text { font-size: 13px; font-weight: 500; line-height: 1.4; flex: 1; }
+  .sticky-bar-text strong { display: block; font-size: 14px; font-weight: 700; color: #e0e7ff; }
+  .sticky-bar-text span { font-size: 12px; color: #a5b4fc; }
+  .sticky-bar-cta {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px; font-weight: 800;
+    padding: 9px 18px;
+    border-radius: 999px;
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: 0 2px 10px rgba(245,158,11,.4);
+    transition: all .15s;
+    flex-shrink: 0;
+  }
+  .sticky-bar-cta:hover { transform: scale(1.04); box-shadow: 0 4px 16px rgba(245,158,11,.5); }
+  .sticky-bar-close {
+    background: none; border: none; color: #a5b4fc;
+    font-size: 18px; cursor: pointer; padding: 4px; line-height: 1;
+    flex-shrink: 0; transition: color .15s;
+  }
+  .sticky-bar-close:hover { color: #fff; }
+  .sticky-bar.hidden { display: none; }
+  @media (max-width: 480px) {
+    .sticky-bar { padding: 10px 12px; gap: 8px; }
+    .sticky-bar-text strong { font-size: 13px; }
+    .sticky-bar-cta { font-size: 12px; padding: 8px 14px; }
+    .footer { padding-bottom: 5rem; }
+    .container { padding-bottom: 5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Hero ── -->
+<header class="hero">
+  <div class="hero-badge">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+    WHO-Based Growth Tracker
+  </div>
+  <h1>Child Growth &amp;<br>Development Tracker</h1>
+  <p>Complete WHO-standard analysis of your child's height, weight, and BMI — plus healthy weight ranges and adult height prediction.</p>
+  <div class="hero-pills">
+    <span class="hero-pill">📏 Height percentile</span>
+    <span class="hero-pill">⚖️ Weight percentile</span>
+    <span class="hero-pill">📊 BMI-for-age</span>
+    <span class="hero-pill">🎯 Adult height forecast</span>
+  </div>
+  <div class="hero-dots"><span></span><span></span><span></span><span></span><span></span></div>
+</header>
+
+<!-- ── Main ── -->
+<main class="container">
+
+  <!-- Gender -->
+  <div class="card">
+    <div class="card-title">
+      <span class="card-title-icon" style="background:#ede9fe;">👶</span>
+      Child's gender
+    </div>
+    <div class="gender-grid">
+      <div class="gender-card" id="boy-card" onclick="selectGender('boy')" tabindex="0" role="button" aria-pressed="false">
+        <div class="gender-check">✓</div>
+        <span class="gender-emoji">🧒</span>
+        <div class="gender-name">Boy</div>
+      </div>
+      <div class="gender-card" id="girl-card" onclick="selectGender('girl')" tabindex="0" role="button" aria-pressed="false">
+        <div class="gender-check">✓</div>
+        <span class="gender-emoji">👧</span>
+        <div class="gender-name">Girl</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Age, Height & Weight -->
+  <div class="card">
+    <div class="card-title">
+      <span class="card-title-icon" style="background:#fce7f3;">📏</span>
+      Age, height &amp; weight
+    </div>
+
+    <div style="margin-bottom:1rem;">
+      <label class="lbl">Child's age</label>
+      <div class="age-row">
+        <div class="field-group">
+          <input type="number" id="age-years" min="0" max="18" placeholder="0" />
+          <label class="lbl" style="margin-top:5px;font-size:11px;">years</label>
+        </div>
+        <div class="age-sep">+</div>
+        <div class="field-group">
+          <input type="number" id="age-months" min="0" max="11" placeholder="0" />
+          <label class="lbl" style="margin-top:5px;font-size:11px;">months</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row2" style="margin-bottom:0;">
+      <div>
+        <label class="lbl">Current height</label>
+        <div class="unit-wrap">
+          <div class="field-group">
+            <input type="number" id="child-height" min="0" max="300" placeholder="e.g. 110" />
+          </div>
+          <div class="unit-toggle">
+            <button class="unit-btn on" id="child-cm" onclick="setUnit('child','cm')">cm</button>
+            <button class="unit-btn" id="child-in" onclick="setUnit('child','in')">in</button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <label class="lbl">Current weight</label>
+        <div class="unit-wrap">
+          <div class="field-group">
+            <input type="number" id="child-weight" min="0" max="200" placeholder="e.g. 22" />
+          </div>
+          <div class="unit-toggle">
+            <button class="unit-btn on" id="child-kg" onclick="setWeightUnit('kg')">kg</button>
+            <button class="unit-btn" id="child-lb" onclick="setWeightUnit('lb')">lb</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Parent Heights -->
+  <div class="card">
+    <div class="card-title">
+      <span class="card-title-icon" style="background:#dcfce7;">👨‍👩‍👧</span>
+      Parent heights
+      <span class="badge-opt">Optional — unlocks adult height prediction</span>
+    </div>
+    <div class="row2">
+      <div class="field-group">
+        <label class="lbl">Father's height</label>
+        <div class="unit-wrap">
+          <div class="field-group"><input type="number" id="father-height" placeholder="e.g. 175" /></div>
+          <div class="unit-toggle">
+            <button class="unit-btn on" id="father-cm" onclick="setUnit('father','cm')">cm</button>
+            <button class="unit-btn" id="father-in" onclick="setUnit('father','in')">in</button>
+          </div>
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="lbl">Mother's height</label>
+        <div class="unit-wrap">
+          <div class="field-group"><input type="number" id="mother-height" placeholder="e.g. 162" /></div>
+          <div class="unit-toggle">
+            <button class="unit-btn on" id="mother-cm" onclick="setUnit('mother','cm')">cm</button>
+            <button class="unit-btn" id="mother-in" onclick="setUnit('mother','in')">in</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="error" id="error-msg">⚠️ Please select a gender, enter your child's age and current height.</p>
+  <button class="calc-btn" id="calc-btn" onclick="calculate()">
+    <div class="calc-btn-inner">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Analyse growth
+    </div>
+  </button>
+
+  <!-- ── Results ── -->
+  <div class="results" id="results">
+
+    <!-- At-a-glance indicator cards -->
+    <div class="results-section-title">At a glance</div>
+    <div class="indicator-grid" id="indicator-grid"></div>
+
+    <!-- Height section -->
+    <div class="results-section-title">📏 Height-for-age</div>
+    <div class="pct-banner" id="pct-banner">
+      <div class="pct-deco"></div>
+      <div class="pct-number" id="pct-num"></div>
+      <div class="pct-who" id="pct-who"></div>
+      <div class="bar-track">
+        <div class="bar-fill" id="bar-fill" style="width:0%">
+          <div class="bar-thumb"></div>
+        </div>
+      </div>
+      <div class="bar-labels"><span>3rd</span><span>25th</span><span>50th</span><span>75th</span><span>97th</span></div>
+      <div class="pct-msg" id="pct-msg"></div>
+    </div>
+
+    <div class="metrics" id="metrics"></div>
+
+    <!-- Weight section -->
+    <div id="weight-section"></div>
+
+    <!-- BMI section -->
+    <div id="bmi-section"></div>
+
+    <!-- Adult height prediction -->
+    <div class="results-section-title">🎯 Adult height prediction</div>
+    <div id="pred-section"></div>
+
+    <!-- Personalised insights -->
+    <div class="results-section-title">💡 Personalised insights</div>
+    <div class="insights-panel" id="insights-panel"></div>
+
+    <!-- Affiliate Block -->
+    <div class="affiliate-block">
+      <div class="affiliate-block-title">
+        🌟 Recommended for your child's growth
+      </div>
+      <div class="affiliate-links">
+        <a href="https://www.amazon.com/s?k=kids+protein+nutrition+supplements&tag=YOURTAG-20" target="_blank" rel="noopener sponsored" class="affiliate-link">
+          <span class="affiliate-link-icon">🥛</span>
+          <span class="affiliate-link-text">
+            <strong>Kids Nutrition &amp; Protein Supplements</strong>
+            <span>Pediatrician-trusted formulas for healthy growth</span>
+          </span>
+          <span class="affiliate-link-arrow">→</span>
+        </a>
+        <a href="https://www.amazon.com/s?k=calcium+bone+health+kids&tag=YOURTAG-20" target="_blank" rel="noopener sponsored" class="affiliate-link">
+          <span class="affiliate-link-icon">🦴</span>
+          <span class="affiliate-link-text">
+            <strong>Calcium &amp; Bone Health Products</strong>
+            <span>Support strong bones and optimal height development</span>
+          </span>
+          <span class="affiliate-link-arrow">→</span>
+        </a>
+        <a href="https://www.amazon.com/s?k=parenting+child+growth+development+books&tag=YOURTAG-20" target="_blank" rel="noopener sponsored" class="affiliate-link">
+          <span class="affiliate-link-icon">📚</span>
+          <span class="affiliate-link-text">
+            <strong>Parenting &amp; Growth Guides</strong>
+            <span>Expert books on child nutrition and development</span>
+          </span>
+          <span class="affiliate-link-arrow">→</span>
+        </a>
+      </div>
+      <p class="affiliate-disclosure">* As an Amazon Associate we earn from qualifying purchases. This does not affect our recommendations.</p>
+    </div>
+
+    <!-- AdSense Unit -->
+    <div class="adsense-unit">
+      <div class="adsense-label">Advertisement</div>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="XXXXXXXXXX"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <div class="disclaimer">
+      <strong>Disclaimer:</strong> This tool is for educational purposes only and does not replace professional medical advice. Percentiles are calculated using simplified WHO Growth Reference data and should be interpreted by a qualified pediatrician in the context of your child's full health history. BMI in children is age- and sex-specific and means something different than adult BMI.
+    </div>
+
+  </div>
+
+</main>
+
+<footer class="footer">
+  <span>
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18C1.61 2.1 2.5 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.61a16 16 0 0 0 6 6l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    Based on WHO Growth Standards · Tanner Mid-Parental Height Method · For educational use only
+  </span>
+</footer>
+
+<!-- Sticky Affiliate Bar -->
+<div class="sticky-bar" id="sticky-bar">
+  <div class="sticky-bar-text">
+    <strong>🌱 Support your child's growth</strong>
+    <span>Pediatrician-recommended nutrition supplements</span>
+  </div>
+  <a href="https://www.amazon.com/s?k=kids+growth+nutrition+supplements&tag=YOURTAG-20" target="_blank" rel="noopener sponsored" class="sticky-bar-cta">Shop Now →</a>
+  <button class="sticky-bar-close" onclick="document.getElementById('sticky-bar').classList.add('hidden')" aria-label="Close">✕</button>
+</div>
+
+<script>
+  /* ═══════════════════════════════════════════════════════════════
+     WHO HEIGHT-FOR-AGE  —  Format: ageMonths → [median_cm, SD_cm]
+     Source: WHO Child Growth Standards & WHO Reference 2007
+  ═══════════════════════════════════════════════════════════════ */
+  const WHO = {
+    boys: {
+      0:[49.9,1.89],3:[61.4,2.17],6:[67.6,2.38],9:[72.3,2.54],12:[75.7,2.63],
+      15:[79.1,2.75],18:[82.3,2.90],21:[85.1,3.02],24:[87.8,3.16],30:[92.7,3.36],
+      36:[96.1,3.51],42:[99.9,3.69],48:[103.3,3.84],54:[106.5,3.99],60:[110.0,4.15],
+      66:[113.0,4.31],72:[116.0,4.47],84:[121.7,4.78],96:[127.3,5.10],108:[132.6,5.43],
+      120:[137.5,5.79],132:[142.2,6.21],144:[146.6,6.73],156:[151.0,7.31],168:[156.2,7.74],
+      180:[162.3,7.74],192:[167.0,7.28],204:[170.1,6.78],216:[172.3,6.33]
+    },
+    girls: {
+      0:[49.1,1.86],3:[59.8,2.22],6:[65.7,2.46],9:[70.1,2.61],12:[74.0,2.75],
+      15:[77.5,2.88],18:[80.7,3.07],21:[83.7,3.22],24:[86.4,3.32],30:[91.1,3.53],
+      36:[95.1,3.73],42:[98.7,3.91],48:[102.7,4.07],54:[106.2,4.21],60:[109.4,4.36],
+      66:[112.8,4.51],72:[116.1,4.66],84:[122.4,5.04],96:[128.2,5.41],108:[133.5,5.74],
+      120:[138.6,6.10],132:[144.0,6.58],144:[149.6,7.02],156:[153.5,7.10],168:[156.0,6.97],
+      180:[157.5,6.73],192:[158.5,6.60],204:[159.0,6.56],216:[159.3,6.54]
+    }
+  };
+
+  /* ═══════════════════════════════════════════════════════════════
+     WHO WEIGHT-FOR-AGE  —  Format: ageMonths → [median_kg, SD_kg]
+     Source: WHO Child Growth Standards & WHO Reference 2007
+  ═══════════════════════════════════════════════════════════════ */
+  const WHO_W = {
+    boys: {
+      0:[3.35,0.43],3:[6.39,0.72],6:[7.93,0.87],9:[9.18,0.99],12:[10.20,1.09],
+      15:[11.10,1.17],18:[11.90,1.25],21:[12.70,1.33],24:[13.48,1.41],30:[14.90,1.57],
+      36:[16.20,1.73],42:[17.40,1.89],48:[18.60,2.06],54:[19.80,2.24],60:[21.00,2.44],
+      66:[22.20,2.65],72:[23.40,2.88],84:[26.0,3.5],96:[29.0,4.2],108:[32.2,5.0],
+      120:[36.0,5.9],132:[40.4,7.0],144:[45.3,8.3],156:[51.0,9.8],168:[57.0,11.4],
+      180:[62.0,12.2],192:[65.9,12.3],204:[68.5,12.0],216:[70.6,11.8]
+    },
+    girls: {
+      0:[3.23,0.40],3:[5.98,0.66],6:[7.30,0.79],9:[8.39,0.90],12:[9.18,0.98],
+      15:[9.96,1.05],18:[10.70,1.13],21:[11.40,1.21],24:[12.15,1.29],30:[13.60,1.45],
+      36:[15.00,1.63],42:[16.20,1.81],48:[17.40,1.99],54:[18.60,2.19],60:[19.90,2.41],
+      66:[21.20,2.65],72:[22.50,2.91],84:[25.2,3.6],96:[28.1,4.4],108:[31.5,5.4],
+      120:[35.5,6.5],132:[40.3,7.9],144:[45.6,9.4],156:[50.8,10.8],168:[54.8,11.7],
+      180:[57.5,12.0],192:[59.3,12.1],204:[60.6,12.1],216:[61.7,12.1]
+    }
+  };
+
+  /* ═══════════════════════════════════════════════════════════════
+     WHO BMI-FOR-AGE  —  [median_bmi, SD_bmi] — approximate values
+     Based on WHO BMI-for-age reference (2–18 years)
+  ═══════════════════════════════════════════════════════════════ */
+  const WHO_BMI = {
+    boys: {
+      24:[16.4,1.6],30:[16.0,1.5],36:[15.7,1.4],42:[15.5,1.4],48:[15.3,1.4],
+      54:[15.2,1.3],60:[15.1,1.3],66:[15.1,1.3],72:[15.0,1.3],84:[15.1,1.4],
+      96:[15.2,1.5],108:[15.5,1.7],120:[15.9,2.0],132:[16.5,2.3],144:[17.2,2.7],
+      156:[18.0,3.1],168:[18.9,3.5],180:[19.7,3.7],192:[20.4,3.8],204:[20.9,3.8],216:[21.3,3.8]
+    },
+    girls: {
+      24:[16.0,1.5],30:[15.7,1.4],36:[15.4,1.3],42:[15.2,1.3],48:[15.0,1.3],
+      54:[14.9,1.3],60:[14.8,1.3],66:[14.7,1.3],72:[14.7,1.3],84:[14.8,1.4],
+      96:[15.0,1.5],108:[15.3,1.7],120:[15.8,2.0],132:[16.5,2.4],144:[17.4,2.8],
+      156:[18.4,3.2],168:[19.2,3.5],180:[19.8,3.6],192:[20.2,3.7],204:[20.5,3.7],216:[20.7,3.7]
+    }
+  };
+
+  /* ─── State ─── */
+  let gender = null;
+  let units  = { child: 'cm', father: 'cm', mother: 'cm' };
+  let weightUnit = 'kg';
+
+  /* ─── Gender selection ─── */
+  function selectGender(g) {
+    gender = g;
+    document.getElementById('boy-card').className  = 'gender-card' + (g === 'boy'  ? ' sel-boy'  : '');
+    document.getElementById('girl-card').className = 'gender-card' + (g === 'girl' ? ' sel-girl' : '');
+    ['boy-card','girl-card'].forEach(id => {
+      document.getElementById(id).setAttribute('aria-pressed', id.startsWith(g));
+    });
+    const btn = document.getElementById('calc-btn');
+    btn.className = 'calc-btn ' + g;
+  }
+
+  /* ─── Height unit toggle ─── */
+  function setUnit(field, unit) {
+    const prev = units[field];
+    if (prev === unit) return;
+    units[field] = unit;
+    const inp = document.getElementById(field + '-height');
+    const val = parseFloat(inp.value);
+    if (!isNaN(val) && val > 0) {
+      inp.value = unit === 'in' ? (val / 2.54).toFixed(1) : (val * 2.54).toFixed(1);
+    }
+    document.getElementById(field + '-cm').className = 'unit-btn' + (unit === 'cm' ? ' on' : '');
+    document.getElementById(field + '-in').className = 'unit-btn' + (unit === 'in' ? ' on' : '');
+  }
+
+  /* ─── Weight unit toggle ─── */
+  function setWeightUnit(unit) {
+    const prev = weightUnit;
+    if (prev === unit) return;
+    weightUnit = unit;
+    const inp = document.getElementById('child-weight');
+    const val = parseFloat(inp.value);
+    if (!isNaN(val) && val > 0) {
+      inp.value = unit === 'lb' ? (val * 2.20462).toFixed(1) : (val / 2.20462).toFixed(1);
+    }
+    document.getElementById('child-kg').className = 'unit-btn' + (unit === 'kg' ? ' on' : '');
+    document.getElementById('child-lb').className = 'unit-btn' + (unit === 'lb' ? ' on' : '');
+  }
+
+  /* ─── Helpers ─── */
+  function toCm(v, unit) { return unit === 'in' ? v * 2.54 : v; }
+  function toKg(v, unit) { return unit === 'lb' ? v / 2.20462 : v; }
+
+  function cmToFtIn(cm) {
+    const totalIn = cm / 2.54;
+    const ft = Math.floor(totalIn / 12);
+    const inch = Math.round(totalIn % 12);
+    return ft + "'" + inch + '"';
+  }
+
+  function kgToLbs(kg) { return (kg * 2.20462).toFixed(1); }
+
+  /* Interpolate WHO table for exact age in months */
+  function whoInterp(mos, table, gKey) {
+    const tbl  = table[gKey];
+    const keys = Object.keys(tbl).map(Number).sort((a,b) => a - b);
+    if (mos <= keys[0]) return tbl[keys[0]];
+    if (mos >= keys[keys.length - 1]) return tbl[keys[keys.length - 1]];
+    let lo, hi;
+    for (let i = 0; i < keys.length - 1; i++) {
+      if (keys[i] <= mos && mos <= keys[i + 1]) { lo = keys[i]; hi = keys[i + 1]; break; }
+    }
+    const t = (mos - lo) / (hi - lo);
+    return [
+      tbl[lo][0] + t * (tbl[hi][0] - tbl[lo][0]),
+      tbl[lo][1] + t * (tbl[hi][1] - tbl[lo][1])
+    ];
+  }
+
+  /* Approximate normal CDF — Abramowitz & Stegun polynomial */
+  function normCDF(z) {
+    const p=0.2316419, b=[0.319381530,-0.356563782,1.781477937,-1.821255978,1.330274429];
+    const t = 1 / (1 + p * Math.abs(z));
+    const poly = t*(b[0]+t*(b[1]+t*(b[2]+t*(b[3]+t*b[4]))));
+    const val  = 1 - (1/Math.sqrt(2*Math.PI)) * Math.exp(-z*z/2) * poly;
+    return z >= 0 ? val : 1 - val;
+  }
+
+  /* Convert z-score to percentile (1–99) */
+  function zToPct(z) { return Math.max(1, Math.min(99, Math.round(normCDF(z) * 100))); }
+
+  /* BMI classification based on BMI-for-age percentile */
+  function bmiClass(bmiPct) {
+    if (bmiPct < 5)  return { label: 'Underweight', cls: 'underweight' };
+    if (bmiPct < 85) return { label: 'Healthy weight', cls: 'healthy' };
+    if (bmiPct < 95) return { label: 'Overweight', cls: 'overweight' };
+    return                  { label: 'Obese', cls: 'obese' };
+  }
+
+  /* Banner state from percentile */
+  function bannerState(pct) {
+    if (pct < 15) return 'low';
+    if (pct > 85) return 'high';
+    return 'ok';
+  }
+
+  /* ─── Healthy weight range from WHO for a given height percentile ─── */
+  /* Reverse-derive: for this age/sex, what weights correspond to BMI 5th–85th pct? */
+  /* We use WHO weight-for-age 15th–85th as a simpler, clinically reasonable proxy  */
+  function healthyWeightRange(mos, gKey) {
+    const [wMedian, wSD] = whoInterp(mos, WHO_W, gKey);
+    /* 15th pct ≈ median − 1.04 SD, 85th pct ≈ median + 1.04 SD */
+    const lo  = Math.max(0, wMedian - 1.04 * wSD);
+    const hi  = wMedian + 1.04 * wSD;
+    /* 3rd and 97th for reference */
+    const vlo = Math.max(0, wMedian - 1.88 * wSD);
+    const vhi = wMedian + 1.88 * wSD;
+    return { lo, hi, vlo, vhi, median: wMedian };
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     MAIN CALCULATE
+  ═══════════════════════════════════════════════════════════════ */
+  function calculate() {
+    const errEl = document.getElementById('error-msg');
+    errEl.classList.remove('show');
+
+    const yrs = parseInt(document.getElementById('age-years').value)  || 0;
+    const mos = parseInt(document.getElementById('age-months').value) || 0;
+    const totalMos = yrs * 12 + mos;
+    const hRaw = parseFloat(document.getElementById('child-height').value);
+    const wRaw = parseFloat(document.getElementById('child-weight').value);
+
+    if (!gender || isNaN(hRaw) || hRaw <= 0 || totalMos <= 0) {
+      errEl.classList.add('show');
+      return;
+    }
+
+    const hCm  = toCm(hRaw, units.child);
+    const hasWeight = !isNaN(wRaw) && wRaw > 0;
+    const wKg  = hasWeight ? toKg(wRaw, weightUnit) : null;
+    const gKey = gender === 'boy' ? 'boys' : 'girls';
+
+    /* ── Height percentile ── */
+    const [hMedian, hSD] = whoInterp(totalMos, WHO, gKey);
+    const hZ   = (hCm - hMedian) / hSD;
+    const hPct = zToPct(hZ);
+
+    /* ── Weight percentile ── */
+    let wPct = null, wZ = null, wMedian = null, wSD_ = null;
+    if (hasWeight) {
+      const [wm, ws] = whoInterp(totalMos, WHO_W, gKey);
+      wMedian = wm; wSD_ = ws;
+      wZ   = (wKg - wm) / ws;
+      wPct = zToPct(wZ);
+    }
+
+    /* ── BMI percentile (only for children ≥ 24 months) ── */
+    let bmi = null, bmiPct = null, bmiCls = null;
+    if (hasWeight && totalMos >= 24) {
+      bmi = wKg / ((hCm / 100) ** 2);
+      const [bm, bs] = whoInterp(totalMos, WHO_BMI, gKey);
+      const bmiZ = (bmi - bm) / bs;
+      bmiPct = zToPct(bmiZ);
+      bmiCls = bmiClass(bmiPct);
+    }
+
+    /* ── Healthy weight range ── */
+    const { lo: wLo, hi: wHi, vlo: wVlo, vhi: wVhi, median: wMed } = healthyWeightRange(totalMos, gKey);
+
+    /* ── At-a-glance indicator cards ── */
+    const wBadge = wPct !== null ? (wPct < 15 ? '<span class="indicator-badge badge-low">Low</span>' : wPct > 85 ? '<span class="indicator-badge badge-high">High</span>' : '<span class="indicator-badge badge-healthy">On track</span>') : '<span class="indicator-badge badge-na">Not entered</span>';
+    const bmiBadge = bmiCls ? `<span class="indicator-badge badge-${bmiCls.cls}">${bmiCls.label}</span>` : totalMos < 24 ? '<span class="indicator-badge badge-na">Age &lt; 2y</span>' : '<span class="indicator-badge badge-na">No weight</span>';
+    const hBadge = hPct < 15 ? '<span class="indicator-badge badge-low">Low</span>' : hPct > 85 ? '<span class="indicator-badge badge-high">High</span>' : '<span class="indicator-badge badge-healthy">On track</span>';
+
+    document.getElementById('indicator-grid').innerHTML = `
+      <div class="indicator-card ic-height">
+        <div class="indicator-icon">📏</div>
+        <div class="indicator-label">Height</div>
+        <div class="indicator-pct">${hPct}<span style="font-size:1rem">th</span></div>
+        <div class="indicator-sub">percentile</div>
+        ${hBadge}
+      </div>
+      <div class="indicator-card ic-weight">
+        <div class="indicator-icon">⚖️</div>
+        <div class="indicator-label">Weight</div>
+        <div class="indicator-pct">${wPct !== null ? wPct + '<span style="font-size:1rem">th</span>' : '—'}</div>
+        <div class="indicator-sub">${wPct !== null ? 'percentile' : 'not entered'}</div>
+        ${wBadge}
+      </div>
+      <div class="indicator-card ic-bmi">
+        <div class="indicator-icon">📊</div>
+        <div class="indicator-label">BMI</div>
+        <div class="indicator-pct">${bmi !== null ? bmi.toFixed(1) : '—'}</div>
+        <div class="indicator-sub">${bmiPct !== null ? bmiPct + 'th pct' : totalMos < 24 ? 'needs age ≥ 2' : 'no weight'}</div>
+        ${bmiBadge}
+      </div>`;
+
+    /* ── Height banner ── */
+    const hState = bannerState(hPct);
+    const banner = document.getElementById('pct-banner');
+    banner.className = 'pct-banner ' + hState;
+    document.getElementById('pct-num').textContent = hPct + 'th percentile';
+    document.getElementById('pct-who').textContent = 'WHO Height-for-Age · ' + (gender === 'boy' ? 'Boys' : 'Girls');
+
+    const fillW = Math.max(2, Math.min(98, hPct));
+    setTimeout(() => { document.getElementById('bar-fill').style.width = fillW + '%'; }, 100);
+
+    const hMsgs = {
+      ok:  '<strong>Your child is in a healthy height range!</strong> Keep up the great work with balanced meals and active play.',
+      low: '<strong>Every child grows at their own pace!</strong> Since your child is in a lower percentile, focus on nutrition (protein &amp; calcium) and consistent sleep. Consult your pediatrician for a personalised growth chart review.',
+      high:'<strong>Your child is tall for their age!</strong> This is usually genetic and perfectly healthy. Continue routine well-child visits to track their growth curve.'
+    };
+    document.getElementById('pct-msg').innerHTML = hMsgs[hState];
+
+    /* Height metrics */
+    const diffCm = (hCm - hMedian).toFixed(1);
+    const diffSign = parseFloat(diffCm) >= 0 ? '+' : '';
+    document.getElementById('metrics').innerHTML = `
+      <div class="metric">
+        <div class="metric-val">${hCm.toFixed(1)}<span style="font-size:.7em;font-weight:500;color:var(--text2)"> cm</span></div>
+        <div class="metric-lbl">Current height</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val">${cmToFtIn(hCm)}</div>
+        <div class="metric-lbl">In ft / inches</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val">${hMedian.toFixed(1)}<span style="font-size:.7em;font-weight:500;color:var(--text2)"> cm</span></div>
+        <div class="metric-lbl">WHO median</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val">${diffSign}${diffCm}<span style="font-size:.7em;font-weight:500;color:var(--text2)"> cm</span></div>
+        <div class="metric-lbl">vs. median</div>
+      </div>`;
+
+    /* ── Weight section ── */
+    const ws = document.getElementById('weight-section');
+    ws.innerHTML = `<div class="results-section-title">⚖️ Weight-for-age</div>`;
+
+    if (hasWeight) {
+      const wState = bannerState(wPct);
+      const wMsgs = {
+        ok:  `<strong>Weight is in a healthy range!</strong> At ${wKg.toFixed(1)} kg, your child is tracking well on the WHO weight-for-age chart.`,
+        low: `<strong>Weight is below average.</strong> At ${wKg.toFixed(1)} kg, your child falls in the lower weight bracket. Discuss nutrition and feeding patterns with your pediatrician.`,
+        high:`<strong>Weight is above average.</strong> At ${wKg.toFixed(1)} kg, your child is in the higher weight bracket. Review diet quality and physical activity levels with your doctor.`
+      };
+      ws.innerHTML += `
+        <div class="pct-banner ${wState}">
+          <div class="pct-deco"></div>
+          <div class="pct-number" style="font-size:2.5rem;">${wPct}th percentile</div>
+          <div class="pct-who">WHO Weight-for-Age · ${gender === 'boy' ? 'Boys' : 'Girls'}</div>
+          <div class="bar-track">
+            <div class="bar-fill" id="wbar-fill" style="width:0%"><div class="bar-thumb"></div></div>
+          </div>
+          <div class="bar-labels"><span>3rd</span><span>25th</span><span>50th</span><span>75th</span><span>97th</span></div>
+          <div class="pct-msg">${wMsgs[wState]}</div>
+        </div>
+        <div class="metrics" style="margin-bottom:1rem;">
+          <div class="metric">
+            <div class="metric-val">${wKg.toFixed(1)}<span style="font-size:.7em;font-weight:500;color:var(--text2)"> kg</span></div>
+            <div class="metric-lbl">Current weight</div>
+          </div>
+          <div class="metric">
+            <div class="metric-val">${kgToLbs(wKg)}<span style="font-size:.7em;font-weight:500;color:var(--text2)"> lbs</span></div>
+            <div class="metric-lbl">In pounds</div>
+          </div>
+          <div class="metric">
+            <div class="metric-val">${wMed.toFixed(1)}<span style="font-size:.7em;font-weight:500;color:var(--text2)"> kg</span></div>
+            <div class="metric-lbl">WHO median</div>
+          </div>
+          <div class="metric">
+            <div class="metric-val">${(wKg - wMed >= 0 ? '+' : '') + (wKg - wMed).toFixed(1)}<span style="font-size:.7em;font-weight:500;color:var(--text2)"> kg</span></div>
+            <div class="metric-lbl">vs. median</div>
+          </div>
+        </div>`;
+      setTimeout(() => {
+        const wf = document.getElementById('wbar-fill');
+        if (wf) wf.style.width = Math.max(2, Math.min(98, wPct)) + '%';
+      }, 150);
+
+      /* Healthy weight range card */
+      /* Map current weight position onto wVlo..wVhi scale → 0–100% */
+      const scaleMin = wVlo * 0.9, scaleMax = wVhi * 1.1;
+      const markerPct = Math.max(2, Math.min(98, ((wKg - scaleMin) / (scaleMax - scaleMin)) * 100));
+      const greenLoP  = Math.max(0, Math.min(100, ((wLo - scaleMin) / (scaleMax - scaleMin)) * 100));
+      const greenHiP  = Math.max(0, Math.min(100, ((wHi - scaleMin) / (scaleMax - scaleMin)) * 100));
+
+      ws.innerHTML += `
+        <div class="weight-range-card">
+          <div class="weight-range-title">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 4v4l3 3"/></svg>
+            Healthy weight range for this age &amp; gender
+          </div>
+          <div class="weight-range-scale">
+            <div class="wrs-marker-label" id="wmk-lbl" style="left:${markerPct}%">${wKg.toFixed(1)} kg</div>
+            <div class="wrs-track">
+              <div class="wrs-marker" id="wmk" style="left:${markerPct}%"></div>
+            </div>
+            <div class="wrs-zone-labels">
+              <span>Underweight</span><span>Healthy range</span><span>Overweight</span>
+            </div>
+          </div>
+          <div class="weight-range-row">
+            <div class="wrange-cell">
+              <div class="wrange-val">${wVlo.toFixed(1)} kg</div>
+              <div class="wrange-lbl">3rd percentile</div>
+            </div>
+            <div class="wrange-cell">
+              <div class="wrange-val">${wLo.toFixed(1)} – ${wHi.toFixed(1)} kg</div>
+              <div class="wrange-lbl">Healthy range (15th–85th)</div>
+            </div>
+            <div class="wrange-cell">
+              <div class="wrange-val">${wMed.toFixed(1)} kg</div>
+              <div class="wrange-lbl">WHO median (50th)</div>
+            </div>
+            <div class="wrange-cell">
+              <div class="wrange-val">${wVhi.toFixed(1)} kg</div>
+              <div class="wrange-lbl">97th percentile</div>
+            </div>
+          </div>
+        </div>`;
+    } else {
+      ws.innerHTML += `<div class="pred-prompt" style="margin-bottom:1rem;">Enter your child's weight above to unlock weight-for-age percentile, healthy weight range, and BMI analysis.</div>`;
+    }
+
+    /* ── BMI section ── */
+    const bmiSec = document.getElementById('bmi-section');
+    bmiSec.innerHTML = `<div class="results-section-title">📊 BMI-for-age</div>`;
+
+    if (bmi !== null && bmiPct !== null) {
+      /* Map BMI onto a 10–30 scale for the gauge needle */
+      const bmiScaleMin = 10, bmiScaleMax = 32;
+      const bmiNeedleP = Math.max(2, Math.min(98, ((bmi - bmiScaleMin) / (bmiScaleMax - bmiScaleMin)) * 100));
+      bmiSec.innerHTML += `
+        <div class="bmi-card">
+          <div class="bmi-title">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            BMI-for-age (WHO reference, age ≥ 2)
+          </div>
+          <div class="bmi-number-row">
+            <div class="bmi-big">${bmi.toFixed(1)}</div>
+            <div class="bmi-meta">
+              <span class="bmi-classification ${bmiCls.cls}">${bmiCls.label}</span>
+              <span class="bmi-pct-note">${bmiPct}th percentile for age &amp; sex</span>
+            </div>
+          </div>
+          <div class="bmi-scale-wrap">
+            <div class="bmi-track">
+              <div class="bmi-needle" id="bmi-needle" style="left:${bmiNeedleP}%"></div>
+            </div>
+            <div class="bmi-scale-labels">
+              <span>10</span><span>14</span><span>18</span><span>22</span><span>26</span><span>30+</span>
+            </div>
+          </div>
+          <div class="bmi-ranges">
+            <span class="bmi-range-chip underweight">Underweight &lt; 5th pct</span>
+            <span class="bmi-range-chip healthy">Healthy 5th–84th pct</span>
+            <span class="bmi-range-chip overweight">Overweight 85th–94th pct</span>
+            <span class="bmi-range-chip obese">Obese ≥ 95th pct</span>
+          </div>
+        </div>`;
+    } else if (!hasWeight) {
+      bmiSec.innerHTML += `<div class="pred-prompt" style="margin-bottom:1rem;">BMI requires both height and weight to be entered.</div>`;
+    } else if (totalMos < 24) {
+      bmiSec.innerHTML += `<div class="pred-prompt" style="margin-bottom:1rem;">WHO BMI-for-age is calculated for children aged 2 years and older. For infants, weight-for-length is used instead.</div>`;
+    }
+
+    /* ── Adult height prediction ── */
+    const fRaw = parseFloat(document.getElementById('father-height').value);
+    const mRaw = parseFloat(document.getElementById('mother-height').value);
+    const predSec = document.getElementById('pred-section');
+
+    if (!isNaN(fRaw) && fRaw > 0 && !isNaN(mRaw) && mRaw > 0) {
+      const fCm = toCm(fRaw, units.father);
+      const mCm = toCm(mRaw, units.mother);
+      const mid  = gender === 'boy' ? (fCm + mCm + 13) / 2 : (fCm + mCm - 13) / 2;
+      const lo   = mid - 5, hi = mid + 5;
+      const gc   = gender === 'boy' ? 'boy' : 'girl';
+      const formula = gender === 'boy'
+        ? `(Father ${fCm.toFixed(0)}cm + Mother ${mCm.toFixed(0)}cm + 13cm) ÷ 2`
+        : `(Father ${fCm.toFixed(0)}cm + Mother ${mCm.toFixed(0)}cm − 13cm) ÷ 2`;
+      predSec.innerHTML = `
+        <div class="pred-card ${gc}">
+          <div class="pred-label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:-1px"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+            Tanner mid-parental height prediction
+          </div>
+          <div class="pred-range">${lo.toFixed(1)} – ${hi.toFixed(1)} cm</div>
+          <div class="pred-sub" style="margin-bottom:4px;">${cmToFtIn(lo)} – ${cmToFtIn(hi)}</div>
+          <div class="pred-sub">Mid-parental target: <strong>${mid.toFixed(1)} cm</strong> ± 5 cm</div>
+          <div class="pred-formula">Formula: ${formula} = ${mid.toFixed(1)} cm</div>
+        </div>`;
+    } else {
+      predSec.innerHTML = `
+        <div class="pred-prompt">
+          Enter both parent heights above to unlock the<br>
+          <strong>adult height prediction</strong> using the Tanner mid-parental method.
+        </div>`;
+    }
+
+    /* ── Personalised insights ── */
+    const ip = document.getElementById('insights-panel');
+    ip.innerHTML = `<div class="insights-title">💡 What these results mean for your child</div>`;
+
+    const insights = [];
+
+    /* Height insight */
+    if (hPct < 15) {
+      insights.push({ dot: 'amber', text: `<strong>Height is below the 15th percentile.</strong> This alone isn't cause for alarm — many children are naturally on the smaller side. Track growth velocity over 6–12 months; a consistent upward curve is the key sign of healthy development.` });
+    } else if (hPct > 85) {
+      insights.push({ dot: 'blue', text: `<strong>Your child is taller than most peers (${hPct}th percentile).</strong> This is often genetic. No intervention needed — continue regular well-child checkups.` });
+    } else {
+      insights.push({ dot: 'green', text: `<strong>Height is well within the normal range (${hPct}th percentile).</strong> Your child is growing consistently with WHO expectations for their age and sex.` });
+    }
+
+    /* Weight insight */
+    if (hasWeight && wPct !== null) {
+      if (wPct < 15) {
+        insights.push({ dot: 'amber', text: `<strong>Weight is below average (${wPct}th percentile).</strong> Consider reviewing caloric intake, meal frequency, and the variety of foods offered. A dietitian or pediatrician can help identify any underlying causes.` });
+      } else if (wPct > 85) {
+        insights.push({ dot: 'red', text: `<strong>Weight is above average (${wPct}th percentile).</strong> Focus on whole foods, limiting sugary drinks, and at least 60 minutes of active play daily. Discuss this trend with your child's doctor.` });
+      } else {
+        insights.push({ dot: 'green', text: `<strong>Weight is in a healthy range (${wPct}th percentile).</strong> Keep up the good work — balanced meals, regular sleep, and active play are the foundation of healthy growth.` });
+      }
+
+      /* Healthy weight range insight */
+      const inRange = wKg >= wLo && wKg <= wHi;
+      const rangeMsg = inRange
+        ? `The healthy weight range for a ${gender === 'boy' ? 'boy' : 'girl'} of this age is <strong>${wLo.toFixed(1)}–${wHi.toFixed(1)} kg</strong>. Your child's weight of <strong>${wKg.toFixed(1)} kg</strong> falls within this range.`
+        : wKg < wLo
+          ? `The healthy weight range for this age is <strong>${wLo.toFixed(1)}–${wHi.toFixed(1)} kg</strong>. At <strong>${wKg.toFixed(1)} kg</strong>, your child is slightly below this range — prioritise calorie-dense nutritious foods.`
+          : `The healthy weight range for this age is <strong>${wLo.toFixed(1)}–${wHi.toFixed(1)} kg</strong>. At <strong>${wKg.toFixed(1)} kg</strong>, your child is slightly above — focus on dietary quality and daily movement.`;
+      insights.push({ dot: inRange ? 'green' : 'amber', text: rangeMsg });
+    } else {
+      insights.push({ dot: 'purple', text: `<strong>Add your child's weight</strong> to unlock weight percentile, healthy weight range, and BMI analysis — giving you a complete growth picture.` });
+    }
+
+    /* BMI insight */
+    if (bmiCls) {
+      const bmiMsgs = {
+        healthy:     `<strong>BMI is in the healthy range</strong> (${bmiPct}th percentile). BMI alone doesn't tell the whole story, but this is a good sign alongside the height and weight data.`,
+        underweight: `<strong>BMI-for-age is low</strong> (${bmiPct}th percentile — underweight). This may indicate insufficient caloric intake. A pediatric dietitian assessment is recommended.`,
+        overweight:  `<strong>BMI-for-age is elevated</strong> (${bmiPct}th percentile — overweight). This is a signal to review diet quality and screen time/activity levels with your pediatrician.`,
+        obese:       `<strong>BMI-for-age is in the obese range</strong> (${bmiPct}th percentile). Please consult your pediatrician — early intervention with nutrition and lifestyle support is beneficial.`
+      };
+      insights.push({ dot: bmiCls.cls === 'healthy' ? 'green' : 'red', text: bmiMsgs[bmiCls.cls] });
+    }
+
+    /* Growth velocity note */
+    insights.push({ dot: 'blue', text: `<strong>Track growth regularly.</strong> WHO recommends monitoring at every well-child visit. A child who consistently follows their growth curve — even if it's the 10th or 90th percentile — is generally growing healthily. Sudden drops or jumps are more significant than the absolute percentile.` });
+
+    ip.innerHTML += insights.map(i => `
+      <div class="insight-item">
+        <div class="insight-dot ${i.dot}"></div>
+        <div class="insight-text">${i.text}</div>
+      </div>`).join('');
+
+    const rWrap = document.getElementById('results');
+    rWrap.className = 'results show';
+    setTimeout(() => rWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+  }
+
+  /* Keyboard support for gender cards */
+  ['boy-card','girl-card'].forEach(id => {
+    const el = document.getElementById(id);
+    el.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        selectGender(id.replace('-card',''));
+      }
+    });
+  });
+</script>
+</body>
+</html>
